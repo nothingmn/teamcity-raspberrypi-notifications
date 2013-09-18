@@ -1,0 +1,27 @@
+{
+	"uri" : "http://user:pass@teamcity.local/app/rest/builds/buildType:(id:{0})",
+	"builds" : [
+			{
+				"id" : "Team A Builds",
+				"owner" : "Rob", 
+				"audioName" : "Rob",
+				"goodLight" : 7,
+				"badLight" : 11,
+				"projects" : [ 
+						{ "id" : "Project_A_Primary_Build" }, 
+						{ "id" : "Project_A_Deploy_to_Staging" }
+				] 
+			}
+			, {
+				"id" : "Team B Builds",
+				"owner" : "Paul", 
+				"audioName" : "Paul",
+				"goodLight" : 13,
+				"badLight" : 15,
+				"projects" : [ 
+					{ "id" : "Project_B_PrimaryBuild" }	
+				] 
+			}
+
+		]
+}

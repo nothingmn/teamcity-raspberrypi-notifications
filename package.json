@@ -1,0 +1,31 @@
+{
+  "name": "teamcity-raspberrypi-notifications",
+  "preferGlobal": true,
+  "version": "0.0.1",
+  "author": "Rob Chartier <rob.chartier@gmail.com>",
+  "description": "A command line app to monitor TeamCity and control lights, etc..",
+  "contributors": [ 
+  ],
+  "scripts": {
+    "start": "node ./TeamCity.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nothingmn/teamcity-raspberrypi-notifications"
+  },
+  "keywords": [
+    "TeamCity",
+    "Build",
+    "RaspBerry Pi"
+  ],
+  "dependencies" : {
+    "request"   : "*",
+    "wait.for" 	: "*",
+    "pi-gpio"	: "*",
+    "node-tts-google" : "*"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.10.15"
+  }
+}
