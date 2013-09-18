@@ -17,3 +17,21 @@ Also, if you want the light automation portion to be working, this must be run o
 
 See https://npmjs.org/package/pi-gpio for light <-> pin setup for each project.
 
+
+Getting started
+===============
+* Copy settings.sample.json to a new file called settings.json
+* Update settings.json to be appropriate for your TeamCity installation and team/project structure.
+* Plugin your lights (or relay switches) to the GPIO pins as described here: https://npmjs.org/package/pi-gpio
+* Update settings.json to indicate the good/bad pins for each "goodLight"/"badLight"
+* Deploy script to a Raspberry Pi
+* ssh into your pi
+* run:
+* npm install 
+* git clone git://github.com/quick2wire/quick2wire-gpio-admin.git
+* cd quick2wire-gpio-admin
+* make
+* sudo make install
+* sudo adduser $USER gpio
+* Finally execute our script by:
+* sudo node client.js
