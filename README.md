@@ -35,3 +35,10 @@ Getting started
 * sudo adduser $USER gpio
 * Finally execute our script by:
 * sudo node client.js
+
+
+Notes
+=====
+If you have an issue when building / installing (on windows) you will need to setup this envrionment variable:
+
+set VisualStudioVersion=11.0
