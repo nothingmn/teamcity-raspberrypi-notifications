@@ -26,7 +26,6 @@ var pollInterval = 1000 * 10;
 var outputAudio = !isWin32;
 var outputLights = isRaspberry;
 
-
 //See https://npmjs.org/package/pi-gpio 
 //For light <-> pin setup
 
