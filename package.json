@@ -27,5 +27,7 @@
   "license": "MIT",
   "engines": {
     "node": ">=0.10.15"
-  }
+  },
+  "main" : "./client", 
+  "bugs" : { "web" : "https://github.com/nothingmn/teamcity-raspberrypi-notifications/issues" }
 }
