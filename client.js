@@ -7,6 +7,7 @@ var util = require('util');
 var request = require("request");
 var wait = require('wait.for');
 var exec = require('child_process').exec, child;
+var path = require('path');
 
 var platform = process.platform;
 var isWin32 = (platform == "win32");
@@ -44,21 +45,27 @@ var lightStates = {};
 //Primary entry point
 function main() {
 
-	var file = __dirname + '/settings.json';
+	//check to see if it is in the parent directory
+	var file = __dirname + '/../settings.json';
+	if (!fs.existsSync(file)) { 
+	    // if not in parent, expect it to be in the local
+	    file = __dirname + '/settings.json';
+	}
 
-	fs.readFile(file, 'utf8', function (err, data) {
-		if (err) {
-			console.log('Error: ' + err);
-			return;
-		}
+	if (fs.existsSync(file)) { 
+		fs.readFile(file, 'utf8', function (err, data) {
+			if (err) {
+				console.log('Error: ' + err);
+				return;
+			}
 
-		data = JSON.parse(data);
-		rootUrl = data.uri;
-		builds = data.builds;
-		console.dir(data);
-		run();
-	});
-
+			data = JSON.parse(data);
+			rootUrl = data.uri;
+			builds = data.builds;
+			console.dir(data);
+			run();
+		});
+	}
 }
 
 function run() {
