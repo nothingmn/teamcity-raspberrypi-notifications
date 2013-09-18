@@ -40,17 +40,18 @@ var previousStatus = {};
 
 //holds the current state of each light per build/project
 var lightStates = {};
-
+var root = __dirname + "/../../";
 
 //Primary entry point
 function main() {
 
 	//check to see if it is in the parent directory
-	var file = __dirname + '/../../settings.json';
+	var file =  root + 'settings.json';
 
 	if (!fs.existsSync(file)) { 
 	    // if not in parent, expect it to be in the local
-	    file = __dirname + '/settings.json';
+	    root = __dirname + "/";
+	    file = root + 'settings.json';
 	}
 
 	if (fs.existsSync(file)) { 
@@ -69,6 +70,7 @@ function main() {
 	}
 }
 
+
 function run() {
 
 	//grab the status right away, and perform notification operations
@@ -81,9 +83,39 @@ function run() {
 	//create an http end point to expose some useful status data
 	//also usefully blocks the thread from exiting
 	http.createServer(function (req, res) {
-	  res.writeHead(200, {'Content-Type': 'application/json'});
-	  res.write(JSON.stringify({ "builds" : builds, "previous" : previousStatus, "lightStates" : lightStates}));
-	  res.end();
+		var url = req.url;
+		if(url == "/") url = "/index.html";
+
+		var path = root + url;
+
+		if (fs.existsSync(path)) { 			
+
+			var type = "text/html";
+			if(url.endsWith(".ico")>0) type = "image/x-icon";
+			if(url.endsWith(".map")>0) type = "text/plain";
+			if(url.endsWith(".js")>0) type = "text/javascript";
+			if(url.endsWith(".json")>0) type = "text/javascript";
+
+			res.writeHead(200, {'Content-Type': type});
+
+			var readStream = fs.createReadStream(path);
+			// This will wait until we know the readable stream is actually valid before piping
+			readStream.on('open', function () {
+				readStream.pipe(res);
+			});
+			// This catches any errors that happen while creating the readable stream (usually invalid names)
+			readStream.on('error', function(err) {
+				res.end(err);
+			});
+
+			// This catches any errors that happen while creating the readable stream (usually invalid names)
+			readStream.on('close', function(err) {
+				console.log('close');
+				res.end();
+			});
+		} else {
+			console.log("no file at:" + url);
+		}
 	}).listen(8000);	
 }
 
@@ -255,5 +287,7 @@ main();
 
 
 
-
+String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
 
