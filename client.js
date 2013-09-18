@@ -46,7 +46,7 @@ var lightStates = {};
 function main() {
 
 	//check to see if it is in the parent directory
-	var file = __dirname + '/../../settings.json';
+	var file = __dirname + '/../../../settings.json';
 	if (!fs.existsSync(file)) { 
 	    // if not in parent, expect it to be in the local
 	    file = __dirname + '/settings.json';
